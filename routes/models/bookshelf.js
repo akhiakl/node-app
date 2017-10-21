@@ -1,4 +1,5 @@
 // Bookshelf db configuration
+
 var dbConfig={
 	client:'mysql',
     connection:{
