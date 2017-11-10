@@ -4,8 +4,8 @@ var User = require('./models/User');
 
 router.get('/', function(req, res) {
 	if (req.session.page=='homepage'){
-		User.forge().fetchAll({columns: ['id', 'name', 'role']}).then(function(everyuser){
-			var result = everyuser.toJSON();
+		User.find({},function(err, everyuser){
+			var result = everyuser;
 			res.render('view', {result: result});
 		});
 	}

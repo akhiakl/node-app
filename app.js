@@ -11,7 +11,8 @@ var view = require('./routes/view');
 var home = require('./routes/home');
 var signout = require('./routes/signout');
 var viewlist = require('./routes/viewlist');
-
+var User = require('./routes/models/User');
+var adduser = require('./routes/adduser');
 
 
 var app = express();
@@ -27,15 +28,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret: 'secretkey', saveUnitialized: true, resave: true, cookie: { maxAge: 24*360*1000}}))
+app.use(session({secret: 'secretkey', saveUninitialized: true, resave: true, cookie: { maxAge: 24*360*1000}}))
 
 app.use('/', index);
+app.use('/adduser', adduser);
 app.use('/view', view);
 app.use('/users', users);
 app.use('/home', home);
 app.use('/signout', signout);
 app.use('/api/viewlist', viewlist);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

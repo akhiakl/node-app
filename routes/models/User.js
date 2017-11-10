@@ -1,28 +1,19 @@
-var bookshelf = require('./bookshelf');
+var schema = require('./schema');
+var mongoose = require('mongoose');
 
-//User module
-var User = bookshelf.Model.extend({  
-    tableName: 'users',
-    hasTimestamps: true,
-    todo: function() {
-        return this.hasMany(Todo)
-    },
+// schema.userSchema.byUsername= function byUsername(username){
+//     this.find({ username: username }, function (err, user) {
+//         if (err) throw err;
+//         return user;
+//     });
+// };
+var User = mongoose.model('User', schema.userSchema);
 
-    verifyPassword: function(password) {
-        return this.get('password') === password;
-    },
-    isAdmin: function() {
-        return this.get('role') === 'admin';
-    },
-},
-{
-    byEmail: function(email) {
-        return this.forge().query({where:{ email: email }}).fetch();
-    },
-    byUsername: function(username) {
-        return this.forge().query({where:{ username: username }}).fetch();
-    }
-},
-);
+// new User({
+//     username: 'akhilk4k',
+//     password: 'password',
+//     email: 'akhilk4k@gmail.com',
+//     admin: true
+// }).save();
 
 module.exports = User;

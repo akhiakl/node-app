@@ -5,8 +5,8 @@ var Todo = require('./models/Todo');
 
 router.get('/', function(req, res) {
     if (req.session.page=='home'){
-        Todo.forge().query({where:{ username: req.session.uname }}).fetchAll().then(function(everyuser){
-            var list = everyuser.toJSON();
+        Todo.find({},function(err, everyuser){
+            var list = everyuser;
             res.render('home', {list: list, username: req.session.uname, name: req.session.name});
         })
 	}
